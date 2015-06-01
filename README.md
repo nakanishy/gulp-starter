@@ -1,8 +1,9 @@
-# gulp_template
+# gulp-template
 
 ## Getting Started
 
 Install dependencies:
+
 ```
 $ npm install
 $ npm run bower install
