@@ -102,6 +102,7 @@ gulp.task('watch', function() {
   gulp.watch(path.join(source.html, '**/*.html'), ['html']);
   gulp.watch(path.join(source.css,  '**/*.scss'), ['compass']);
   gulp.watch(path.join(source.js, '**/*.js'), ['js']);
+  gulp.watch(path.join(source.image, '**/*'), ['imagemin']);
 });
 
 gulp.task('build', function(callback) {
