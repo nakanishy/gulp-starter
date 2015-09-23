@@ -5,6 +5,7 @@ var path        = require('path');
 var gulp        = require('gulp');
 var plumber     = require('gulp-plumber');
 var compass     = require('gulp-compass');
+var minifyHTML  = require('gulp-minify-html');
 var minifyCSS   = require('gulp-minify-css');
 var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
@@ -44,11 +45,13 @@ var server = {
 
 gulp.task('html', function() {
   return gulp.src(path.join(source.html, '**/*.html'))
+    .pipe(minifyHTML({
+      quotes: true
+    }))
     .pipe(gulp.dest(build.html));
 });
 
 gulp.task('compass', function() {
-  // _が使いないファイルのみ
   return gulp.src([path.join(source.css, '**/*.scss'), '!'+path.join(source.css, '**/_*.scss')])
     .pipe(plumber())
     .pipe(compass({
@@ -88,7 +91,6 @@ gulp.task('clean', function(cb) {
   del([build.root], cb);
 });
 
-// build内を監視して変更があればリロード
 gulp.task('webserver', function() {
   gulp.src(build.root)
    .pipe(webserver({
